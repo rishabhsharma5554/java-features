@@ -1,7 +1,8 @@
 package com.rishahtech.java8.placement.company.globant.code;
 
 import java.util.Arrays;
-
+//time complexity
+//Since both arrays are already sorted, merging them takes linear time O(n + m) with O(n + m) extra space.
 public class SortedArray {
 
     public static void main(String[] args) {
