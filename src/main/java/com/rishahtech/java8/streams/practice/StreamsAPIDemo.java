@@ -18,9 +18,9 @@ public class StreamsAPIDemo {
 		System.out.println("*********************Query 1 : How many male and female employees are there in the organization?");
 		Map<String, Long> maleFamaleEmployee = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.counting()));
 		System.out.println(maleFamaleEmployee);
-		
+
 		for(Map.Entry<String, Long> e : maleFamaleEmployee.entrySet())
-		System.out.println(e.getKey()+ "  --- >   "+e.getValue());
+			System.out.println(e.getKey()+ "  --- >   "+e.getValue());
 		
 		
 		
@@ -275,7 +275,7 @@ public class StreamsAPIDemo {
 		employeeList.stream().filter(emp -> emp.getGender().equals("Female")).forEach(System.out::println);
 		
 		System.out.println("xx");
-		employeeList.stream().filter(emp -> emp.getGender().equals("Female")).sorted((e1,e2) -> e1.getAge()-e2.getAge()).collect(Collectors.toList()).forEach(System.out::println);;
+		employeeList.stream().filter(emp -> emp.getGender().equals("Female")).sorted((e1,e2) -> e1.getAge()-e2.getAge()).toList().forEach(System.out::println);;
 		
 		System.out.println();
 		
@@ -307,6 +307,7 @@ public class StreamsAPIDemo {
 		employeeList.add(new Employee(255, "Ali Baig", 23, "Male", "Infrastructure", 2018, 12700.0));
 		employeeList.add(new Employee(266, "Sanvi Pandey", 26, "Female", "Product Development", 2015, 28900.0));
 		employeeList.add(new Employee(277, "Anuj Chettiar", 31, "Male", "Product Development", 2012, 35700.0));
+		employeeList.add(new Employee(277, "Rishabh", 29, "Male", "Developer", 2021, 150000.0));
 		return employeeList;
 	}
 }

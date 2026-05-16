@@ -1,30 +1,16 @@
-package com.app.bank.bank_demo;
+package com.rishahtech.java8.streams.practice;
+
+import com.rishahtech.java8.streams.practice.Employee;
+import com.rishahtech.java8.streams.practice.StreamsAPIDemo;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TestMain {
-    static void main() {
-        ArrayList<Employee> employeeList = new ArrayList<>();
-        employeeList.add(new Employee(111, "Jiya Brein", 32, "Female", "HR", 2011, 25000.0));
-        employeeList.add(new Employee(122, "Paul Niksui", 25, "Male", "Sales And Marketing", 2015, 13500.0));
-        employeeList.add(new Employee(133, "Martin Theron", 29, "Male", "Infrastructure", 2012, 18000.0));
-        employeeList.add(new Employee(144, "Murali Gowda", 28, "Male", "Product Development", 2014, 32500.0));
-        employeeList.add(new Employee(155, "Nima Roy", 27, "Female", "HR", 2013, 22700.0));
-        employeeList.add(new Employee(166, "Iqbal Hussain", 75, "Male", "Security And Transport", 2016, 10500.0));
-        employeeList.add(new Employee(177, "Manu Sharma", 35, "Male", "Account And Finance", 2010, 27000.0));
-        employeeList.add(new Employee(188, "Wang Liu", 31, "Male", "Product Development", 2015, 34500.0));
-        employeeList.add(new Employee(199, "Amelia Zoe", 24, "Female", "Sales And Marketing", 2016, 11500.0));
-        employeeList.add(new Employee(200, "Jaden Dough", 38, "Male", "Security And Transport", 2015, 11000.5));
-        employeeList.add(new Employee(211, "Jasna Kaur", 27, "Female", "Infrastructure", 2014, 15700.0));
-        employeeList.add(new Employee(222, "Nitin Joshi", 25, "Male", "Product Development", 2016, 28200.0));
-        employeeList.add(new Employee(233, "Jyothi Reddy", 27, "Female", "Account And Finance", 2013, 21300.0));
-        employeeList.add(new Employee(244, "Nicolus Den", 24, "Male", "Sales And Marketing", 2017, 10700.5));
-        employeeList.add(new Employee(255, "Ali Baig", 23, "Male", "Infrastructure", 2018, 12700.0));
-        employeeList.add(new Employee(266, "Sanvi Pandey", 26, "Female", "Product Development", 2015, 28900.0));
-        employeeList.add(new Employee(277, "Anuj Chettiar", 31, "Male", "Product Development", 2012, 35700.0));
-		employeeList.forEach(System.out::println);
+    private final static ArrayList<Employee> employeeList = StreamsAPIDemo.initalizeEmployees();
+    public static void main(String []args) {
+
 
         //key points
         /*
@@ -226,69 +212,70 @@ public class TestMain {
                 .toList();
         System.out.println("First names of multi-word named employees : " + firstNames);
 
-        *********************FlatMap Q1 : Split all employee names into individual words and collect as a flat list?
-All name words : [Jiya, Brein, Paul, Niksui, Martin, Theron, Murali, Gowda, Nima, Roy, Iqbal, Hussain, Manu, Sharma, Wang, Liu, Amelia, Zoe, Jaden, Dough, Jasna, Kaur, Nitin, Joshi, Jyothi, Reddy, Nicolus, Den, Ali, Baig, Sanvi, Pandey, Anuj, Chettiar]
 
-*********************FlatMap Q2 : Get all distinct words from department names?
-Distinct department words : [HR, Sales, Marketing, Infrastructure, Product, Development, Security, Transport, Account, Finance]
+//        *********************FlatMap Q1 : Split all employee names into individual words and collect as a flat list?
+//All name words : [Jiya, Brein, Paul, Niksui, Martin, Theron, Murali, Gowda, Nima, Roy, Iqbal, Hussain, Manu, Sharma, Wang, Liu, Amelia, Zoe, Jaden, Dough, Jasna, Kaur, Nitin, Joshi, Jyothi, Reddy, Nicolus, Den, Ali, Baig, Sanvi, Pandey, Anuj, Chettiar]
 
-*********************FlatMap Q3 : Get all distinct characters from all employee names (lowercase)?
-Distinct characters in employee names : [a, b, c, d, e, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, y, z]
+//*********************FlatMap Q2 : Get all distinct words from department names?
+//Distinct department words : [HR, Sales, Marketing, Infrastructure, Product, Development, Security, Transport, Account, Finance]
 
-*********************FlatMap Q4 : For each department, get a flat list of (department - employeeName) strings?
-Department-Employee pairs : 
-Product Development - Murali Gowda
-Product Development - Wang Liu
-Product Development - Nitin Joshi
-Product Development - Sanvi Pandey
-Product Development - Anuj Chettiar
-Security And Transport - Iqbal Hussain
-Security And Transport - Jaden Dough
-Sales And Marketing - Paul Niksui
-Sales And Marketing - Amelia Zoe
-Sales And Marketing - Nicolus Den
-Infrastructure - Martin Theron
-Infrastructure - Jasna Kaur
-Infrastructure - Ali Baig
-HR - Jiya Brein
-HR - Nima Roy
-Account And Finance - Manu Sharma
-Account And Finance - Jyothi Reddy
+//*********************FlatMap Q3 : Get all distinct characters from all employee names (lowercase)?
+//Distinct characters in employee names : [a, b, c, d, e, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, y, z]
 
-*********************FlatMap Q5 : Given a list of lists of employees (grouped by gender), flatten into a single list sorted by salary?
-Flattened & sorted by salary (desc) : 
-Anuj Chettiar -> 35700.0
-Wang Liu -> 34500.0
-Murali Gowda -> 32500.0
-Sanvi Pandey -> 28900.0
-Nitin Joshi -> 28200.0
-Manu Sharma -> 27000.0
-Jiya Brein -> 25000.0
-Nima Roy -> 22700.0
-Jyothi Reddy -> 21300.0
-Martin Theron -> 18000.0
-Jasna Kaur -> 15700.0
-Paul Niksui -> 13500.0
-Ali Baig -> 12700.0
-Amelia Zoe -> 11500.0
-Jaden Dough -> 11000.5
-Nicolus Den -> 10700.5
-Iqbal Hussain -> 10500.0
-
-*********************FlatMap Q6 : For each employee, generate multiple attributes as a flat stream (name, department, salary) and collect?
-Employee attributes (first 9) : 
-Name: Jiya Brein
-Dept: HR
-Salary: 25000.0
-Name: Paul Niksui
-Dept: Sales And Marketing
-Salary: 13500.0
-Name: Martin Theron
-Dept: Infrastructure
-Salary: 18000.0
-
-*********************FlatMap Q7 : Get employees whose name contains more than one word and collect all first names?
-First names of multi-word named employees : [Jiya, Paul, Martin, Murali, Nima, Iqbal, Manu, Wang, Amelia, Jaden, Jasna, Nitin, Jyothi, Nicolus, Ali, Sanvi, Anuj]
+//*********************FlatMap Q4 : For each department, get a flat list of (department - employeeName) strings?
+//Department-Employee pairs :
+//Product Development - Murali Gowda
+//Product Development - Wang Liu
+//Product Development - Nitin Joshi
+//Product Development - Sanvi Pandey
+//Product Development - Anuj Chettiar
+//Security And Transport - Iqbal Hussain
+//Security And Transport - Jaden Dough
+//Sales And Marketing - Paul Niksui
+//Sales And Marketing - Amelia Zoe
+//Sales And Marketing - Nicolus Den
+//Infrastructure - Martin Theron
+//Infrastructure - Jasna Kaur
+//Infrastructure - Ali Baig
+//HR - Jiya Brein
+//HR - Nima Roy
+//Account And Finance - Manu Sharma
+//Account And Finance - Jyothi Reddy
+//
+//*********************FlatMap Q5 : Given a list of lists of employees (grouped by gender), flatten into a single list sorted by salary?
+//Flattened & sorted by salary (desc) :
+//Anuj Chettiar -> 35700.0
+//Wang Liu -> 34500.0
+//Murali Gowda -> 32500.0
+//Sanvi Pandey -> 28900.0
+//Nitin Joshi -> 28200.0
+//Manu Sharma -> 27000.0
+//Jiya Brein -> 25000.0
+//Nima Roy -> 22700.0
+//Jyothi Reddy -> 21300.0
+//Martin Theron -> 18000.0
+//Jasna Kaur -> 15700.0
+//Paul Niksui -> 13500.0
+//Ali Baig -> 12700.0
+//Amelia Zoe -> 11500.0
+//Jaden Dough -> 11000.5
+//Nicolus Den -> 10700.5
+//Iqbal Hussain -> 10500.0
+//
+//*********************FlatMap Q6 : For each employee, generate multiple attributes as a flat stream (name, department, salary) and collect?
+//Employee attributes (first 9) :
+//Name: Jiya Brein
+//Dept: HR
+//Salary: 25000.0
+//Name: Paul Niksui
+//Dept: Sales And Marketing
+//Salary: 13500.0
+//Name: Martin Theron
+//Dept: Infrastructure
+//Salary: 18000.0
+//
+//*********************FlatMap Q7 : Get employees whose name contains more than one word and collect all first names?
+//First names of multi-word named employees : [Jiya, Paul, Martin, Murali, Nima, Iqbal, Manu, Wang, Amelia, Jaden, Jasna, Nitin, Jyothi, Nicolus, Ali, Sanvi, Anuj]
 
 
     }
