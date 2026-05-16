@@ -288,10 +288,49 @@ public class PracticeQuestionsWithAnswers {
 
         // ========================= From Codebase (missing questions) =========================
         System.out.println("CB 1 : Filter all even numbers from an int array using streams? (begineer/EvenNumbers)");
+        int []arr = new int[]{1,2,3,4,5,6,7,8,9,10};
+        Arrays.stream(arr).filter(num -> num % 2 == 0).boxed().toList().forEach(System.out::print);
+        System.out.println();
+
         System.out.println("CB 2 : Convert a list of strings to a list of characters using flatMap? (begineer/StringsToCharacter)");
+        List<String> names_ = Arrays.asList("Rishabh","Mohit","Rohit");
+        List<String> stringToCharacter = names_.stream()
+                .flatMap(n -> Arrays.stream(n.split("")))
+                .toList();
+        System.out.println(stringToCharacter);
+        System.out.println();
+
         System.out.println("CB 3 : Sum all integer values in a list using streams? (begineer/SumAllIntValues)");
+        List<Integer> numbers_ = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9,10);
+        long sumOfNumbers_ = numbers_.parallelStream()
+                .collect(Collectors.summarizingInt(Integer::intValue))
+                .getSum();
+        System.out.println(sumOfNumbers_);
+        System.out.println();
+
         System.out.println("CB 4 : Find the longest word in a sentence using streams? (begineer/LongestWordInSentence)");
+        String sentance = "I love my India, I am finding my first longest word.";
+        String longestWord = Arrays.stream(sentance.split(" "))
+                .toList()
+                .parallelStream()
+                .sorted(Comparator.comparingInt(String::length).reversed())
+                .findFirst()
+                .get();
+        System.out.println(longestWord);
+        System.out.println();
+
         System.out.println("CB 5 : Square each number in a list and convert between list and array? (Deloitte/SquareOfNumber)");
+        int[] arrNumbers = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,16};
+        List<Integer> listNumbers = Arrays.stream(arrNumbers).boxed().toList();
+        List<Integer> squaredNumber = listNumbers.stream().map(n -> n * n).toList();
+        System.out.println(squaredNumber);
+        System.out.println();
+
+        int[] squares = Arrays.stream(arrNumbers)
+                .map(n -> n * n)
+                .toArray();
+        System.out.println(Arrays.toString(squares));
+
         System.out.println("CB 6 : Convert a string to alternate uppercase and lowercase characters? (Newgen/AlternateCharacter)");
         System.out.println("CB 7 : Given a date string, print the day of the week using LocalDate? (Newgen/DataProblem)");
         System.out.println("CB 8 : Parse a date-time string and extract minute and month? (Newgen/DataProblem)");
