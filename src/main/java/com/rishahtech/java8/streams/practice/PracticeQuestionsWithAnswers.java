@@ -1,11 +1,13 @@
 package com.rishahtech.java8.streams.practice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PracticeQuestionsWithAnswers {
     private final static ArrayList<Employee> employeeList = StreamsAPIDemo.initalizeEmployees();
@@ -158,9 +160,55 @@ public class PracticeQuestionsWithAnswers {
         System.out.println();
 
         System.out.println("FlatMap Q1 : Split all employee names into individual words and collect as a flat list?");
+        List<String> allNameWords = employeeList.parallelStream()
+                        .map(Employee::getName)
+                        .flatMap(emp -> Arrays.stream(emp.split(" ")))
+                        .toList();
+        System.out.println(allNameWords);
+        System.out.println();
+
         System.out.println("FlatMap Q2 : Get all distinct words from department names?");
+        List<String> list = employeeList.parallelStream()
+                .map(Employee::getDepartment)
+                .flatMap(emp -> Arrays.stream(emp.split(" ")))
+                .distinct()
+                .toList();
+        System.out.println(list);
+        System.out.println();
+
         System.out.println("FlatMap Q3 : Get all distinct characters from all employee names (lowercase)?");
+        List<String> distinctCharactersFromAllEmpNames = employeeList.parallelStream()
+                .map(Employee::getName)
+                .flatMap(empNames -> Arrays.stream(empNames.split("")))
+                .map(String::toLowerCase)
+                .filter(ch -> !ch.equals(" "))
+                .distinct()
+                .sorted()
+                .toList();
+
+        System.out.println(distinctCharactersFromAllEmpNames);
+        System.out.println();
+
+        String[] names = {"Rishabh","Madhuri","Prachi","Lucky","Satya"};
+        List<String> allDistinctChars = Arrays.stream(names)
+                .flatMap(name -> Arrays.stream(name.split("")))
+                .map(String::toLowerCase)
+                .distinct()
+                .sorted()
+                .toList();
+        System.out.println(allDistinctChars);
+        System.out.println();
+
         System.out.println("FlatMap Q4 : For each department, get a flat list of (department - employeeName) strings?");
+        List<String> deptEmpPairs = employeeList.parallelStream()
+                        .collect(Collectors.groupingBy(Employee::getDepartment))
+                        .entrySet()
+                        .stream()
+                        .flatMap(entry -> entry.getValue().stream().map(emp -> entry.getKey() + " - " + emp.getName()))
+                        .toList();
+        deptEmpPairs.forEach(System.out::println);
+        System.out.println();
+
         System.out.println("FlatMap Q5 : Given a list of lists of employees (grouped by gender), flatten into a single list sorted by salary?");
         System.out.println("FlatMap Q6 : For each employee, generate multiple attributes as a flat stream (name, department, salary) and collect?");
         System.out.println("FlatMap Q7 : Get employees whose name contains more than one word and collect all first names?");
