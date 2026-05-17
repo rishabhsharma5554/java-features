@@ -1,5 +1,8 @@
 package com.rishahtech.java8.placement.company.globant.code.yt;
 
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -31,6 +34,8 @@ If custom object does not override them correctly,
 lookup will fail and return null.
 */
 
+@AllArgsConstructor
+@ToString
 class User {
 
     /*
@@ -43,11 +48,6 @@ class User {
     */
     private final int userId;
     private final String userName;
-
-    User(int userId, String userName) {
-        this.userId = userId;
-        this.userName = userName;
-    }
 
     /*
     equals() tells HashMap:
@@ -85,19 +85,11 @@ class User {
     }
 }
 
+@AllArgsConstructor
+@ToString
 class UserDetails {
     String location;
     String role;
-
-    UserDetails(String location, String role) {
-        this.location = location;
-        this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return location + " " + role;
-    }
 }
 
 public class UnderstandHashMap {
