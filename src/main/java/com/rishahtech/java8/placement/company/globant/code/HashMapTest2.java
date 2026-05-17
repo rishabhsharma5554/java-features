@@ -9,13 +9,13 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-class Employee{
+class Employee2{
     int id;
     String name;
     Address address;
 
-    public Employee clone() {
-        return new Employee(id, name, address.clone());
+    public Employee2 clone() {
+        return new Employee2(id, name, address.clone());
     }
 }
 @Setter
@@ -34,11 +34,11 @@ class Address{
 
 public class HashMapTest2 {
     public static void main(String[] args) {
-        Employee emp1 = new Employee(1,"Rishabh",new Address("Dewas","MP"));
+        Employee2 emp1 = new Employee2(1,"Rishabh",new Address("Dewas","MP"));
         System.out.println(emp1);
 
         // Prototype Pattern: deep clone
-        Employee emp2 = emp1.clone();
+        Employee2 emp2 = emp1.clone();
         emp2.setId(2);
 
         System.out.println(emp1);
