@@ -1,6 +1,10 @@
 package com.rishahtech.DBLearning;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +29,7 @@ import java.util.List;
  * ==============
  * - Default lazy loading in JPA causes related entities to be loaded only when accessed
  * - When you iterate through parent entities and access their collections, Hibernate triggers
- *   additional SELECT statements for each parent
+ *   additional SELECT statements for each parent. 
  *
  * SOLUTIONS:
  * =========
@@ -39,6 +43,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "departments")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,20 +58,6 @@ class Department {
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<Employee> employees = new ArrayList<>();
 
-    public Department() {}
-
-    public Department(String name) {
-        this.name = name;
-    }
-
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public List<Employee> getEmployees() { return employees; }
-    public void setEmployees(List<Employee> employees) { this.employees = employees; }
-
     public void addEmployee(Employee employee) {
         employees.add(employee);
         employee.setDepartment(this);
@@ -72,6 +66,10 @@ class Department {
 
 @Entity
 @Table(name = "employees")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,19 +81,6 @@ class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public Employee() {}
-
-    public Employee(String name) {
-        this.name = name;
-    }
-
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public Department getDepartment() { return department; }
-    public void setDepartment(Department department) { this.department = department; }
 }
 
 // ==================== REPOSITORY ====================
